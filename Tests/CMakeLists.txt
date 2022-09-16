@@ -39,7 +39,7 @@ add_executable(${PROJECT_NAME}
 set_source_files_properties(
         tests/test_DeviceAudioCapabilities.cpp
         tests/test_DeviceVideoCapabilities.cpp
-        tests/test_SystemServices.cpp
+        tests/test_SystemServicesTest.cpp
         PROPERTIES COMPILE_FLAGS "-fexceptions")
 
 include_directories(../LocationSync
@@ -59,6 +59,7 @@ include_directories(../LocationSync
         ../DeviceInfo
         ../helpers
         ../SystemServices
+        ../HdmiInput
         )
 link_directories(../LocationSync
         ../PersistentStore
@@ -76,6 +77,7 @@ link_directories(../LocationSync
         ../UserPreferences
         ../Messenger
         ../DeviceInfo
+        ../HdmiInput
         )
 
 target_link_libraries(${PROJECT_NAME}
@@ -97,6 +99,7 @@ target_link_libraries(${PROJECT_NAME}
         ${NAMESPACE}UserPreferences
         ${NAMESPACE}Messenger
         ${NAMESPACE}DeviceInfo
+        ${NAMESPACE}HdmiInput
         )
 
 target_include_directories(${PROJECT_NAME}
