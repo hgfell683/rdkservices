@@ -106,9 +106,13 @@ namespace Plugin {
         int capabilities = dsMS12SUPPORT_NONE;
 
         try {
+            LOGERR("[%s][%d] Try to get MS12 capabilities", __FUNCTION__, __LINE__);
             auto strAudioPort = audioPort.empty() ? device::Host::getInstance().getDefaultAudioPortName() : audioPort;
+            LOGERR("[%s][%d] Audio port name: %s", __FUNCTION__, __LINE__, strAudioPort.c_str());
             auto& aPort = device::Host::getInstance().getAudioOutputPort(strAudioPort);
+            LOGERR("[%s][%d] Audio port name: %s", __FUNCTION__, __LINE__, aPort.getName().c_str());
             aPort.getMS12Capabilities(&capabilities);
+            LOGERR("[%s][%d] MS12 capabilities: %d", __FUNCTION__, __LINE__, capabilities);
         } catch (const device::Exception& e) {
             TRACE(Trace::Fatal, (_T("Exception caught %s"), e.what()));
             result = Core::ERROR_GENERAL;
@@ -142,10 +146,15 @@ namespace Plugin {
         std::list<string> list;
 
         try {
+            LOGERR("[%s][%d] Try to get supported MS12 audio profiles", __FUNCTION__, __LINE__);
             auto strAudioPort = audioPort.empty() ? device::Host::getInstance().getDefaultAudioPortName() : audioPort;
+            LOGERR("[%s][%d] Audio port name: %s", __FUNCTION__, __LINE__, strAudioPort.c_str());
             auto& aPort = device::Host::getInstance().getAudioOutputPort(strAudioPort);
+            LOGERR("[%s][%d] Audio port name: %s", __FUNCTION__, __LINE__, aPort.getName().c_str());
             const auto supportedProfiles = aPort.getMS12AudioProfileList();
+            LOGERR("[%s][%d] Number of supported MS12 audio profiles: %d", __FUNCTION__, __LINE__, supportedProfiles.size());
             for (size_t i = 0; i < supportedProfiles.size(); i++) {
+                LOGERR("[%s][%d] MS12 audio profile: %s", __FUNCTION__, __LINE__, supportedProfiles.at(i).c_str());
                 list.emplace_back(supportedProfiles.at(i));
             }
         } catch (const device::Exception& e) {

@@ -132,10 +132,15 @@ namespace Plugin {
         std::list<string> list;
 
         try {
+            LOGERR("[%s][%d] Try to get supported resolutions", __FUNCTION__, __LINE__);
             auto strVideoPort = videoDisplay.empty() ? device::Host::getInstance().getDefaultVideoPortName() : videoDisplay;
+            LOGERR("[%s][%d] Video port name: %s", __FUNCTION__, __LINE__, strVideoPort.c_str());
             auto& vPort = device::Host::getInstance().getVideoOutputPort(strVideoPort);
+            LOGERR("[%s][%d] Video port name: %s", __FUNCTION__, __LINE__, vPort.getName().c_str());
             const auto resolutions = device::VideoOutputPortConfig::getInstance().getPortType(vPort.getType().getId()).getSupportedResolutions();
+            LOGERR("[%s][%d] Number of supported resolutions: %d", __FUNCTION__, __LINE__, resolutions.size());
             for (size_t i = 0; i < resolutions.size(); i++) {
+                LOGERR("[%s][%d] Resolution: %s", __FUNCTION__, __LINE__, resolutions.at(i).getName().c_str());
                 list.emplace_back(resolutions.at(i).getName());
             }
         } catch (const device::Exception& e) {
