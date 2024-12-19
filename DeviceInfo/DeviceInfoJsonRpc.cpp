@@ -370,10 +370,14 @@ namespace Plugin {
         RPC::IStringIterator* supportedResolutions = nullptr;
 
         auto result = _deviceVideoCapabilities->SupportedResolutions(params.VideoDisplay.Value(), supportedResolutions);
+        LOGERR("[%s][%d] result %d", __FUNCTION__, __LINE__, result);
         if (result == Core::ERROR_NONE) {
             string element;
             while (supportedResolutions->Next(element) == true) {
                 Core::EnumerateType<JsonData::DeviceInfo::Output_resolutionType> value(element.c_str(), false);
+                LOGGER("[%s][%d] element %s", __FUNCTION__, __LINE__, element.c_str());
+                LOGGER("[%s][%d] value.Value %d", __FUNCTION__, __LINE__, value.Value());
+                LOGGER("[%s][%d] value.IsSet %d", __FUNCTION__, __LINE__, value.IsSet());
                 if (value.IsSet()) {
                     response.SupportedResolutions.Add() = value.Value();
                 } else {
