@@ -376,7 +376,6 @@ namespace Plugin {
             while (supportedResolutions->Next(element) == true) {
                 Core::EnumerateType<JsonData::DeviceInfo::Output_resolutionType> value(element.c_str(), false);
                 LOGERR("[%s][%d] element %s", __FUNCTION__, __LINE__, element.c_str());
-                LOGERR("[%s][%d] value.Value %d", __FUNCTION__, __LINE__, value.Value());
                 LOGERR("[%s][%d] value.IsSet %d", __FUNCTION__, __LINE__, value.IsSet());
                 if (value.IsSet()) {
                     response.SupportedResolutions.Add() = value.Value();
